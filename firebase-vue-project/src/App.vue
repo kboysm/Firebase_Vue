@@ -2,31 +2,11 @@
   <v-app>
     <v-app-bar app color="deep-purple accent-4" dense dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Page title</v-toolbar-title>
-
+      <site-title :title="title"></site-title>
       <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" class="deep-purple accent-4" dark>
-      <v-list>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <site-menu :items="items" />
 
       <template v-slot:append>
         <div class="pa-2">
@@ -37,18 +17,24 @@
     <v-content>
       <router-view />
     </v-content>
-    <v-footer app color="primary" absolute>
-      <v-spacer></v-spacer>
-      <div>&copy; {{ new Date().getFullYear() }}</div>
-    </v-footer>
+    <site-footer :footer="footer" />
   </v-app>
 </template>
 
 <script>
+import SiteTitle from "@/views/site/SiteTitle"
+import SiteFooter from "@/views/site/SiteFooter"
+import SiteMenu from "@/views/site/SiteMenu"
 export default {
   name: "App",
-
+  components: {
+    SiteTitle,
+    SiteFooter,
+    SiteMenu,
+  },
   data: () => ({
+    title: "testTiitle",
+    footer: "testFooter",
     drawer: false,
     items: [
       { title: "Dashboard", icon: "dashboard" },
