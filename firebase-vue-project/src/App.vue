@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar app color="deep-purple accent-4" dense dark>
+    <v-app-bar app dense dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <site-title :title="title"></site-title>
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" class="deep-purple accent-4" dark>
-      <site-menu :items="items" />
+    <v-navigation-drawer app v-model="drawer" dark>
+      <site-menu />
 
       <template v-slot:append>
         <div class="pa-2">
@@ -36,11 +36,6 @@ export default {
     title: "testTiitle",
     footer: "testFooter",
     drawer: false,
-    items: [
-      { title: "Dashboard", icon: "dashboard" },
-      { title: "Account", icon: "account_box" },
-      { title: "Admin", icon: "gavel" },
-    ],
   }),
 }
 </script>
