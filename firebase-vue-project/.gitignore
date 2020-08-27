@@ -25,3 +25,5 @@ pnpm-debug.log*
 database.rules.json
 firestore.rules
 storage.rules
+firebaseConfig.js
+.firebaserc
