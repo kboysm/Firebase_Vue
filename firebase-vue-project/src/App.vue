@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app dense dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <site-title :title="title"></site-title>
+      <site-title :title="site.title"></site-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="save">
         <v-icon>mdi-check</v-icon>
@@ -15,7 +15,7 @@
       </v-btn>
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" dark>
-      <site-menu />
+      <site-menu :items="site.menu" />
 
       <template v-slot:append>
         <div class="pa-2">
@@ -26,7 +26,7 @@
     <v-content>
       <router-view />
     </v-content>
-    <site-footer :footer="footer" />
+    <site-footer :footer="site.footer" />
   </v-app>
 </template>
 
@@ -42,14 +42,36 @@ export default {
     SiteMenu,
   },
   data: () => ({
-    title: "testTiitle",
-    footer: "testFooter",
+    site: {
+      title: "testTiitle",
+      footer: "testFooter",
+      menu: [],
+    },
     drawer: false,
   }),
   created() {
-    console.log(this.$firebase)
+    this.subscribe()
   },
   methods: {
+    subscribe() {
+      this.$firebase
+        .database()
+        .ref()
+        .child("site")
+        .on(
+          "value",
+          (sn) => {
+            const v = sn.val()
+            if (!v) {
+              this.$firebase.database().ref().child("site").set(this.site)
+            }
+            this.site = v
+          },
+          (e) => {
+            console.log(e.message)
+          }
+        )
+    },
     save() {
       this.$firebase.database().ref().child("abcd").set({
         //ref는 root , 차일드로 abcd 주입 set안에는 object가 들어감
@@ -71,6 +93,7 @@ export default {
       //잘 활용하면 다이나믹한 자동으로 마구마구 바뀌는 기능을 구현할 수 있다
     },
     async readOne() {
+      //이건 파이프 x ,1번만 읽는거
       const sn = await this.$firebase
         .database()
         .ref()
