@@ -43,8 +43,8 @@ export default {
   },
   data: () => ({
     site: {
-      title: "testTiitle",
-      footer: "testFooter",
+      title: "",
+      footer: "",
       menu: [],
     },
     drawer: false,
