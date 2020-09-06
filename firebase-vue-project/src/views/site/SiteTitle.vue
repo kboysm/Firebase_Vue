@@ -50,9 +50,7 @@ export default {
           .ref()
           .child("site")
           .update({ title: this.text })
-      } catch (e) {
-        console.log(e.message)
-      } finally {
+      }  finally {
         this.dialog = false
       }
     },

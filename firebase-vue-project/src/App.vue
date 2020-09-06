@@ -14,9 +14,9 @@
         </div>
       </template>
     </v-navigation-drawer>
-    <v-content>
+    <v-main>
       <router-view />
-    </v-content>
+    </v-main>
     <site-footer :footer="site.footer" />
   </v-app>
 </template>
@@ -69,6 +69,7 @@ export default {
   }),
   created() {
     this.subscribe()
+    throw Error("dddd")
   },
   methods: {
     subscribe() {
