@@ -5,14 +5,14 @@
       <site-title :title="site.title"></site-title>
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" dark>
+    <v-navigation-drawer app v-model="drawer" width="400" dark>
       <site-menu :items="site.menu" />
 
-      <template v-slot:append>
+      <!-- <template v-slot:append>
         <div class="pa-2">
           <v-btn block>Logout</v-btn>
         </div>
-      </template>
+      </template>-->
     </v-navigation-drawer>
     <v-main>
       <router-view />
